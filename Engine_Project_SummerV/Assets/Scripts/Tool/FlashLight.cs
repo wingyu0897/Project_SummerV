@@ -2,30 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlashLight : MonoBehaviour
+public class FlashLight : Item
 {
 	private bool isOn = true;
-	
-	[SerializeField] private KeyCode switchKey;
-
+	[SerializeField] private ToolData flashLightData;
+	public ToolData FlashLightData
+	{
+		get => flashLightData;
+		set => flashLightData = value;
+	}
 	[SerializeField] private GameObject lights;
 
-	private void Update()
+	public override void Init()
 	{
-		
+		lights.SetActive(true);
 	}
 
-	private void Execution()
+	public override void UseItem()
 	{
-		if (Input.GetKeyDown(switchKey))
-		{
-			isOn = !isOn;
-		}
-		lights?.SetActive(isOn);
+		isOn = isOn ? false : true;
+		lights.SetActive(isOn);
 	}
 
-	private void Init()
+	public override ToolData ReturnData()
 	{
-		lights?.SetActive(true);
+		return flashLightData;
 	}
 }

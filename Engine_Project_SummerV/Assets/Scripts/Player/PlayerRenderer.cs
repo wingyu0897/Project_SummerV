@@ -7,36 +7,35 @@ public class PlayerRenderer : MonoBehaviour
 	[SerializeField] private string backwardSortingLayer;
 	[SerializeField] private string forwardSortingLayer;
 
+	private AgentData playerData;
 	private SpriteRenderer myRenderer;
 	private Animator myAnimator;
 
 	private readonly int faceDirectionHash = Animator.StringToHash("Front");
 	private readonly int walkHash = Animator.StringToHash("Walk");
 
-	[SerializeField] private float minDeg = 45f;
-	[SerializeField] private float maxDeg = 135f;
-
-	private bool faceBack = false;
 	private bool isWalking = false;
+	private bool faceBack = false;
 
 	private void Awake()
 	{
+		playerData = transform.parent.gameObject.GetComponent<PlayerMovement>().PlayerData;
 		myRenderer = GetComponent<SpriteRenderer>();
 		myAnimator = GetComponent<Animator>();
 	}
 
-	public void FaceDirection(Vector2 pointerInput)
+	public void FaceDirection(Vector3 pointerInput)
+	{
+		faceBack = pointerInput.z < playerData.turnBackwardMinDeg || pointerInput.z > playerData.turnBackwardMaxDeg;
+		myRenderer.sortingLayerName = faceBack ? forwardSortingLayer : backwardSortingLayer;
+		myAnimator.SetBool(faceDirectionHash, faceBack ? true : false);
+	}
+
+	public void FlipX(Vector2 pointerInput)
 	{
 		Vector3 direction = (Vector3)pointerInput - transform.position;
 		Vector3 result = Vector3.Cross(Vector2.up, direction);
-		Vector3 face = Vector3.Cross(Vector2.right, direction);
-		float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-		if (angle > 180) { angle -= 360; }
 
-		faceBack = angle < minDeg || angle > maxDeg;
-
-		myRenderer.sortingLayerName = faceBack ? forwardSortingLayer : backwardSortingLayer;
-		myAnimator.SetBool(faceDirectionHash, faceBack ? true : false);
 		myRenderer.flipX = result.z > 0;
 	}
 

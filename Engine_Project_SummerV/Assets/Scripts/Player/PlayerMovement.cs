@@ -7,9 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
 	public UnityEvent<float> OnVelocityChange;
 
-	[SerializeField] private float speed = 5f;
-	[SerializeField] private float acceleration = 0.05f;
-	[SerializeField] private float deAcceleration = 0.05f;
+	[SerializeField] private AgentData playerData;
+	public AgentData PlayerData { get => playerData; }
 	
 	private Rigidbody2D myRigid;
 
@@ -44,13 +43,13 @@ public class PlayerMovement : MonoBehaviour
 	{
 		if (moveInput.sqrMagnitude > 0)
 		{
-			currentVelocity += acceleration * Time.deltaTime;
+			currentVelocity += playerData.acceleration * Time.deltaTime;
 		}
 		else
 		{
-			currentVelocity -= deAcceleration * Time.deltaTime;
+			currentVelocity -= playerData.deAcceleration * Time.deltaTime;
 		}
 
-		return Mathf.Clamp(currentVelocity, 0, speed);
+		return Mathf.Clamp(currentVelocity, 0, playerData.speed);
 	}
 }
