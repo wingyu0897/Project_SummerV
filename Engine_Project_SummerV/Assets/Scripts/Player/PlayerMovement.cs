@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
-	public UnityEvent<float> OnVelocityChange;
+	public UnityEvent<Vector2> OnVelocityChange;
 
 	[SerializeField] private AgentData playerData;
 	public AgentData PlayerData { get => playerData; }
@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		OnVelocityChange?.Invoke(currentVelocity);
+		OnVelocityChange?.Invoke(myRigid.velocity);
 		myRigid.velocity = moveDirection * currentVelocity;
 	}
 

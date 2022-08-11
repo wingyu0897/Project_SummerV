@@ -39,9 +39,9 @@ public class PlayerRenderer : MonoBehaviour
 		myRenderer.flipX = result.z > 0;
 	}
 
-	public void AnimatePlayer(float velocity)
+	public void AnimatePlayer(Vector2 velocity)
 	{
-		isWalking = velocity > 0;
+		isWalking = velocity.sqrMagnitude > 0;
 		SetWalkAnimation(isWalking);
 	}
 
