@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class ItemUse : MonoBehaviour
 {
+	[SerializeField] private KeyCode useKey;
     [SerializeField] private Item primaryItem;
-
-	private void Awake()
-	{
-		primaryItem.Init();
-	}
+	public Item PrimaryItem { get => primaryItem; set => primaryItem = value; }
 
 	private void Update()
 	{
-		KeyCode useKey = primaryItem.ReturnData().useKey;
 		if (Input.GetKeyDown(useKey))
 		{
-			primaryItem.UseItem();
+			primaryItem?.UseItem();
 		}
 	}
 }

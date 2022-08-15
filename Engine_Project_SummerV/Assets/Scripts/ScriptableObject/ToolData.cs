@@ -11,5 +11,5 @@ public enum ItemCollectType
 public class ToolData : ScriptableObject
 {
     public ItemCollectType collectType;
-    public KeyCode useKey = KeyCode.Mouse0;
+    public Sprite itemSprite;
 }

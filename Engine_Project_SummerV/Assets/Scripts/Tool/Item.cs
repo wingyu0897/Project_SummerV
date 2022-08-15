@@ -11,5 +11,7 @@ public abstract class Item : MonoBehaviour
 
     public abstract void Init();
     public abstract void UseItem();
+	public abstract void OnDrop();
+	public abstract void OnInteraction();
 	public abstract ToolData ReturnData(); 
 }
