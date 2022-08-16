@@ -4,6 +4,7 @@ using UnityEngine;
 public class ItemController : MonoBehaviour
 {
 	[SerializeField] Transform itemHolder;
+	[SerializeField] int itemsMax;
 
 	[SerializeField] private KeyCode changeItemKey;
 	[SerializeField] private KeyCode dropItemKey;
@@ -76,13 +77,25 @@ public class ItemController : MonoBehaviour
 
 	public void PickUpItem(Item item)
 	{
-		item.transform.SetParent(itemHolder);
-		item.OnInteraction();
-		items.Add(item);
+		if (items.Count < itemsMax)
+		{
+			item.transform.SetParent(itemHolder);
+			item.OnInteraction();
+			item.gameObject.SetActive(false);
+			items.Add(item);
+		}
+		else
+		{
+			GameManager.Instance.PopText("Inventory Full");
+		}
 	}
 
-	public void HandMove(Vector3 pointerPos)
+	public void HandMove(Vector3 pointerInput)
     {
-		transform.eulerAngles = pointerPos;
-    }
+		transform.eulerAngles = pointerInput;
+		if (itemUse.PrimaryItem != null)
+		{
+			itemUse.PrimaryItem.gameObject.GetComponent<SpriteRenderer>().flipY = !(pointerInput.z < 90 || pointerInput.z > 270);
+		}
+	}
 }

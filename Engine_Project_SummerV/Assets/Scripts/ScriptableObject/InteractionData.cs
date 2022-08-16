@@ -15,6 +15,8 @@ public class InteractionData : ScriptableObject
     public InteractionType interactionType;
 
     public float interactionTime;
-
+    public float activeTime;
     public string interactionMessage;
+    public Sprite idleSprite;
+    public Sprite interactionSprite;
 }

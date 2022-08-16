@@ -6,17 +6,11 @@ public class FlashLight : Item, IInteractable
 {
 	private bool canActive = true;
 	public bool CanActive => canActive;
+	private bool isLight = true;
 
-	private bool isActive = true;
-
-	[SerializeField] private ToolData flashLightData;
-	public ToolData FlashLightData
-	{
-		get => flashLightData;
-		set => flashLightData = value;
-	}
 	[SerializeField] private GameObject lights;
-	
+	[SerializeField] private ToolData flashLightItemData;
+	public override ToolData ItemData => flashLightItemData;
 
 	[SerializeField] private InteractionData interactionData;
 	public InteractionData InteractionData => interactionData;
@@ -29,13 +23,8 @@ public class FlashLight : Item, IInteractable
 
 	public override void UseItem()
 	{
-		isActive = isActive ? false : true;
-		lights.SetActive(isActive);
-	}
-
-	public override ToolData ReturnData()
-	{
-		return flashLightData;
+		isLight = isLight ? false : true;
+		lights.SetActive(isLight);
 	}
 
 	public override void OnDrop()

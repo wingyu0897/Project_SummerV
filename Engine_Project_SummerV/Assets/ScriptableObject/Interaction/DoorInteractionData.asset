@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee00524a169db9479d071aaff7e4f3e, type: 3}
+  m_Name: DoorInteractionData
+  m_EditorClassIdentifier: 
+  interactionType: 1
+  interactionTime: 2
+  activeTime: 3
+  interactionMessage: GATE OPEN
+  idleSprite: {fileID: 852954744568305550, guid: 52df2023808a14f459c84b96dfad4e33, type: 3}
+  interactionSprite: {fileID: 4528803322846254097, guid: 52df2023808a14f459c84b96dfad4e33, type: 3}

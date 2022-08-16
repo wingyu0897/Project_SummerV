@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemUse : MonoBehaviour
@@ -10,6 +8,7 @@ public class ItemUse : MonoBehaviour
 
 	private void Update()
 	{
+		GameManager.Instance.primaryItem = this.primaryItem;
 		if (Input.GetKeyDown(useKey))
 		{
 			primaryItem?.UseItem();

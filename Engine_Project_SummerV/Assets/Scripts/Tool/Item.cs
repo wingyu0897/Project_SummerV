@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Item : MonoBehaviour
 {
+	public abstract ToolData ItemData { get; }
+
     protected virtual void Awake()
 	{
 		Init();
@@ -13,5 +15,4 @@ public abstract class Item : MonoBehaviour
     public abstract void UseItem();
 	public abstract void OnDrop();
 	public abstract void OnInteraction();
-	public abstract ToolData ReturnData(); 
 }

@@ -24,6 +24,10 @@ public class Interaction : MonoBehaviour
 
 	private void PrimaryInteractionSelector()
 	{
+		if (primaryInteraction?.CanActive == false)
+		{
+			interactables.Remove(primaryInteraction);
+		}
 		if (interactables.Count <= 0)
 		{
 			primaryInteraction = null;
@@ -34,10 +38,6 @@ public class Interaction : MonoBehaviour
 		}
 		else
 		{
-			if (primaryInteraction.CanActive == false)
-			{
-				interactables.Remove(primaryInteraction);
-			}
 			foreach (IInteractable f in interactables)
 			{
 				if (Vector3.Distance(transform.position, f.gameObject.transform.position) <
@@ -51,7 +51,7 @@ public class Interaction : MonoBehaviour
 
 	private void SetInteractionIcon()
 	{
-		if (primaryInteraction != null && primaryInteraction.CanActive == true)
+		if (primaryInteraction?.CanActive == true)
 		{
 			interactionIcon.gameObject.SetActive(true);
 			interactionIcon.fillAmount = interactionTime / primaryInteraction.InteractionData.interactionTime;
@@ -72,10 +72,15 @@ public class Interaction : MonoBehaviour
 				interactionTime += Time.deltaTime;
 				if (interactionTime >= primaryInteraction.InteractionData.interactionTime)
 				{
+					interactionTime = 0;
+					GameManager.Instance.PopText(primaryInteraction.InteractionData.interactionMessage);
 					switch (primaryInteraction.InteractionData.interactionType)
 					{
 						case InteractionType.Item :
 							onInteraction?.Invoke(primaryInteraction.gameObject.GetComponent<Item>());
+							break;
+						case InteractionType.Door :
+							primaryInteraction.OnInteraction();
 							break;
 					}
 				}
@@ -93,21 +98,15 @@ public class Interaction : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.GetComponent<IInteractable>() != null && 
-			collision.gameObject.GetComponent<IInteractable>().CanActive == true)
+		if (collision.gameObject.GetComponent<IInteractable>()?.CanActive == true)
 		{
 			interactables.Add(collision.GetComponent<IInteractable>());
-			if (primaryInteraction == null)
-			{
-				primaryInteraction = interactables[0];
-			}
 		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		if (collision.gameObject.GetComponent<IInteractable>() != null &&
-			collision.gameObject.GetComponent<IInteractable>().CanActive == true)
+		if (collision.gameObject.GetComponent<IInteractable>()?.CanActive == true)
 		{
 			interactables.Remove(collision.GetComponent<IInteractable>());
 		}
