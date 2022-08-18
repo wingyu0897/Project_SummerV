@@ -18,3 +18,4 @@ MonoBehaviour:
   interactionMessage: GATE OPEN
   idleSprite: {fileID: 852954744568305550, guid: 52df2023808a14f459c84b96dfad4e33, type: 3}
   interactionSprite: {fileID: 4528803322846254097, guid: 52df2023808a14f459c84b96dfad4e33, type: 3}
+  requireItem: {fileID: 4642854124547293687, guid: e249c38d568f7e84b8abbcbdac7085be, type: 3}

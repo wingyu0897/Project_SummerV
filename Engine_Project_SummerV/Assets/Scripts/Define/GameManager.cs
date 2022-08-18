@@ -11,11 +11,11 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField] private TextMeshProUGUI interactionText;
 
-	public Item primaryItem;
+	public Item primaryItem; //현재 들고있는 아이템
 
 	private Sequence seq;
 
-	private bool isPowerOn = false;
+	private bool isPowerOn = false; //전력 공급 여부
 	public bool IsPowerOn
 	{
 		get => isPowerOn;
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	public void PopText(string message)
+	public void InteractionText(string message) //상호작용을 할 시 나타나는 텍스트 메소드
 	{
 		seq.Kill();
 	

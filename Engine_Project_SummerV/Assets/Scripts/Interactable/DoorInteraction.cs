@@ -23,19 +23,25 @@ public class DoorInteraction : MonoBehaviour, IInteractable
 	public void OnInteraction()
 	{
 		if (GameManager.Instance.IsPowerOn == true)
-		{
-			StartCoroutine(CoOpenDoor());
+		{	
+			if (GameManager.Instance.primaryItem?.name == interactionData?.requireItem.name)
+			{
+				StartCoroutine(CoOpenDoor());
+			}
+			else
+			{
+				GameManager.Instance.InteractionText($"Need {interactionData.requireItem.name}");
+			}
 		}
 		else
 		{
-			GameManager.Instance.PopText("There is no power");
+			GameManager.Instance.InteractionText("There is no power");
 		}
 	}
 
 	IEnumerator CoOpenDoor()
 	{
 		canActive = false;
-		Debug.Log(canActive);
 		spriteRenderer.sprite = interactionData.interactionSprite;
 		doorCollider.enabled = false;
 

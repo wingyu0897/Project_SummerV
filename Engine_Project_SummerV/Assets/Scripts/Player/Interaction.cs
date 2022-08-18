@@ -73,13 +73,16 @@ public class Interaction : MonoBehaviour
 				if (interactionTime >= primaryInteraction.InteractionData.interactionTime)
 				{
 					interactionTime = 0;
-					GameManager.Instance.PopText(primaryInteraction.InteractionData.interactionMessage);
+					GameManager.Instance.InteractionText(primaryInteraction.InteractionData.interactionMessage);
 					switch (primaryInteraction.InteractionData.interactionType)
 					{
 						case InteractionType.Item :
 							onInteraction?.Invoke(primaryInteraction.gameObject.GetComponent<Item>());
 							break;
 						case InteractionType.Door :
+							primaryInteraction.OnInteraction();
+							break;
+						case InteractionType.OnOff :
 							primaryInteraction.OnInteraction();
 							break;
 					}

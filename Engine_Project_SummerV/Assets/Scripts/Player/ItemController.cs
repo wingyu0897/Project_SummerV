@@ -8,6 +8,7 @@ public class ItemController : MonoBehaviour
 
 	[SerializeField] private KeyCode changeItemKey;
 	[SerializeField] private KeyCode dropItemKey;
+
 	[SerializeField] Vector3 dropPosition;
 
 	[SerializeField] private List<Item> items = new List<Item>();
@@ -51,11 +52,14 @@ public class ItemController : MonoBehaviour
 	{
 		if (Input.GetKeyDown(changeItemKey))
 		{
-			items[currentItemNum]?.gameObject.SetActive(false);
-			currentItemNum = currentItemNum == items.Count - 1 ? 0 : ++currentItemNum;
+			if (items.Count != 0)
+			{
+				items[currentItemNum]?.gameObject.SetActive(false);
+				currentItemNum = currentItemNum >= items.Count - 1 ? 0 : ++currentItemNum;
 
-			items[currentItemNum]?.gameObject.SetActive(true);
-			itemUse.PrimaryItem = items[currentItemNum] != null ? items[currentItemNum] : null;
+				items[currentItemNum]?.gameObject.SetActive(true);
+				itemUse.PrimaryItem = items[currentItemNum] != null ? items[currentItemNum] : null;
+			}
 		}
 		if (Input.GetKeyDown(dropItemKey))
 		{
@@ -68,7 +72,8 @@ public class ItemController : MonoBehaviour
 		if (itemUse.PrimaryItem != null)
 		{
 			items.Remove(itemUse.PrimaryItem);
-
+			
+			currentItemNum = currentItemNum != 0 ? --currentItemNum : 0;
 			itemUse.PrimaryItem.transform.position = transform.position + dropPosition;
 			itemUse.PrimaryItem.OnDrop();
 			itemUse.PrimaryItem = null;
@@ -83,10 +88,15 @@ public class ItemController : MonoBehaviour
 			item.OnInteraction();
 			item.gameObject.SetActive(false);
 			items.Add(item);
+			if (itemUse.PrimaryItem == null)
+			{
+				itemUse.PrimaryItem = item;
+				item.gameObject.SetActive(true);
+			}
 		}
 		else
 		{
-			GameManager.Instance.PopText("Inventory Full");
+			GameManager.Instance.InteractionText("Inventory Full");
 		}
 	}
 

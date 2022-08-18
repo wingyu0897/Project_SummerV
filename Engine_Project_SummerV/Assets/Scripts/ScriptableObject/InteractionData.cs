@@ -19,4 +19,5 @@ public class InteractionData : ScriptableObject
     public string interactionMessage;
     public Sprite idleSprite;
     public Sprite interactionSprite;
+    public Item requireItem;
 }

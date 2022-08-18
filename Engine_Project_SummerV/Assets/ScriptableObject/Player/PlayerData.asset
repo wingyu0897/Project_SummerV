@@ -15,6 +15,6 @@ MonoBehaviour:
   speed: 2
   acceleration: 20
   deAcceleration: 20
-  turnSpeed: 0.025
+  turnSpeed: 0.03
   turnBackwardMinDeg: 25
   turnBackwardMaxDeg: 155

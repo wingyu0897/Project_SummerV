@@ -219,7 +219,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 2
+  m_PointLightOuterRadius: 3
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -401,8 +401,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1bb9b3359b6a454ebf6e9fd9635c9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashLightData: {fileID: 11400000, guid: 75fb626d7495937449234cbdf0164e62, type: 2}
   lights: {fileID: 8407957840962488889}
+  flashLightItemData: {fileID: 0}
   interactionData: {fileID: 11400000, guid: 8b950cf7e41acaf45aa67f05ffda8b16, type: 2}
 --- !u!58 &8407957840494137549
 CircleCollider2D:
