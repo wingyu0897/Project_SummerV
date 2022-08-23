@@ -6,7 +6,8 @@ public enum InteractionType
 {
     Item,
     Door,
-    OnOff
+    OnOff,
+    Teleport
 }
 
 [CreateAssetMenu(menuName = "SO/Interaction")]

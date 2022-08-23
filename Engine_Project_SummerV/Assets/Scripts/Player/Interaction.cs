@@ -38,11 +38,12 @@ public class Interaction : MonoBehaviour
 		}
 		else
 		{
-			foreach (IInteractable f in interactables)
+			foreach (IInteractable f in interactables) //가장 가까운 오브젝트로 결정
 			{
 				if (Vector3.Distance(transform.position, f.gameObject.transform.position) <
 						Vector3.Distance(transform.position, primaryInteraction.gameObject.transform.position))
 				{
+					interactionTime = 0;
 					primaryInteraction = f;
 				}
 			}
@@ -83,6 +84,9 @@ public class Interaction : MonoBehaviour
 							primaryInteraction.OnInteraction();
 							break;
 						case InteractionType.OnOff :
+							primaryInteraction.OnInteraction();
+							break;
+						case InteractionType.Teleport :
 							primaryInteraction.OnInteraction();
 							break;
 					}
